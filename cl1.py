@@ -16,9 +16,9 @@ class CL1(_Classifier):
     def __init__(
         self,
         path,
-        l1_autoencoder: Model,
-        l2_autoencoder: Model,
-        l3_autoencoder: Model,
+        l1_autoencoder: _Autoencoder,
+        l2_autoencoder: _Autoencoder,
+        l3_autoencoder: _Autoencoder,
     ):
         super().__init__(path)
         self._l1_encoder = l1_autoencoder.encoder
