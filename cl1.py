@@ -33,7 +33,7 @@ class CL1(_Classifier):
                 self._l3_encoder,
                 nn.Flatten(),
                 nn.Dropout(p=0.1),
-                nn.Linear(64 * 8 * 8, 256),
+                nn.Linear(64 * 16 * 4, 256),  # from ae3 output
                 nn.ReLU(),
                 nn.Dropout(p=0.1),
                 nn.Linear(256, 64),

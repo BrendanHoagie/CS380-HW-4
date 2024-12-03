@@ -15,7 +15,7 @@ class AE1(_Autoencoder):
         n_kernels = 64
 
         self.encoder = Model(
-            # input_size, output_size, num_params, kernel size
+            # input_shape = input_size, output_size, num_params, kernel size
             input_shape=(self.BATCH_SIZE, 3, 64, 64),
             layers=[
                 nn.Conv2d(
@@ -30,6 +30,7 @@ class AE1(_Autoencoder):
         )
 
         self.decoder = Model(
+            # these numbers were chosen arbitrarily via experimentation
             input_shape=(self.BATCH_SIZE, 64, 16, 32),
             layers=[
                 nn.ConvTranspose2d(
