@@ -31,7 +31,7 @@ class AE3(_Autoencoder):
         )
 
         self.decoder = Model(
-            input_shape=(self.BATCH_SIZE, 64, 4, 4),
+            input_shape=(self.BATCH_SIZE, 64, 8, 8),
             layers=[
                 nn.ConvTranspose2d(
                     in_channels=n_kernels,

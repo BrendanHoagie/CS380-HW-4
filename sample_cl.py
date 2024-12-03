@@ -14,9 +14,7 @@ class Sample_Cl(_Classifier):
         n_kernels = 64
 
         self.model = Model(
-
             input_shape=(self.BATCH_SIZE, 3, 64, 64),
-
             layers=[
                 nn.Conv2d(3, n_kernels, kernel_size=3, padding=1),
                 nn.ReLU(),
@@ -30,31 +28,31 @@ class Sample_Cl(_Classifier):
                 nn.ReLU(),
                 nn.Dropout(p=0.2),
                 nn.Linear(128, 4),
-            ]
+            ],
         )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
 
     epochs = int(sys.argv[1]) if len(sys.argv) > 1 else None
 
-    data = Data.load('data', image_size=64)
+    data = Data.load("data", image_size=64)
     data.shuffle()
 
-    cl = Sample_Cl('models/sample_cl.pt')
+    cl = Sample_Cl("models/sample_cl.pt")
     cl.print()
 
     if not epochs:
-        print(f'\nLoading {cl.path}...')
+        print(f"\nLoading {cl.path}...")
         cl.load()
     else:
-        train_data, test_data = data.split(.8)
-        print(f'\nTraining...')
+        train_data, test_data = data.split(0.8)
+        print(f"\nTraining...")
         cl.train(epochs, train_data, test_data)
-        print(f'\nSaving {cl.path}...')
+        print(f"\nSaving {cl.path}...")
         cl.save()
 
     results = cl.classify(data)
-    print(f'\nAccuracy: {results.accuracy(data):.1f}%')
-    print(f'\nConfusion Matrix:\n\n{results.confusion_matrix(data)}')
+    print(f"\nAccuracy: {results.accuracy(data):.1f}%")
+    print(f"\nConfusion Matrix:\n\n{results.confusion_matrix(data)}")
     results.display(32, data)
